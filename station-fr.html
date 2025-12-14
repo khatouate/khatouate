@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de plaintes de la station-service</title>
+    <title>Formulaire de Réclamation - Station-Service</title>
     <style>
         * {
             margin: 0;
@@ -16,6 +16,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            direction: ltr;
         }
         
         .hotel-form-container {
@@ -75,14 +76,6 @@
         .hotel-form-header p {
             font-size: 16px;
             opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hotel-logo {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 15px;
             position: relative;
             z-index: 1;
         }
@@ -256,7 +249,7 @@
         .hotel-rating-group {
             display: flex;
             gap: 8px;
-            flex-direction: row-reverse;
+            flex-direction: row;
             justify-content: center;
             margin-top: 10px;
         }
@@ -406,8 +399,7 @@
             .hotel-checkbox-group {
                 grid-template-columns: 1fr;
             }
-            
-            .hotel-logo {
+             .hotel-logo {
                 max-width: 100%;
                 margin-bottom: 12px;
                 padding: 8px;
@@ -423,12 +415,12 @@
     <div class="hotel-form-container">
         <div class="hotel-form-header">
             <img src="https://khatouate.github.io/khatouate/logo.png" alt="Logo" class="hotel-logo">
-            <h2>⛽ Formulaire de plaintes de la station-service</h2>
-            <p>Nous apprécions vos commentaires et nous nous efforçons d'améliorer nos services en permanence</p>
+            <h2>⛽ Formulaire de Réclamation - Station-Service</h2>
+            <p>Nous apprécions vos retours et nous efforçons d'améliorer continuellement nos services</p>
         </div>
         <div class="hotel-form-body">
             <div class="success-message" id="successMessage">
-                ✅ Votre plainte a été envoyée avec succès ! Nous vous contacterons bientôt.
+                ✅ Votre réclamation a été envoyée avec succès ! Nous vous contacterons bientôt.
             </div>
             <div class="error-message" id="errorMessage"></div>
             
@@ -446,16 +438,16 @@
                     <label class="hotel-form-label">Type de service reçu</label>
                     <div class="hotel-checkbox-group">
                         <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="Checkbox_1" name="Checkbox" value="Ravitaillement en carburant">
-                            <label for="Checkbox_1" class="hotel-checkbox-label">⛽ Ravitaillement en carburant</label>
+                            <input type="checkbox" id="Checkbox_1" name="Checkbox" value="Plein de carburant">
+                            <label for="Checkbox_1" class="hotel-checkbox-label">⛽ Plein de carburant</label>
                         </div>
                         <div class="hotel-checkbox-item">
                             <input type="checkbox" id="Checkbox_2" name="Checkbox" value="Lavage de voiture">
                             <label for="Checkbox_2" class="hotel-checkbox-label">🚗 Lavage de voiture</label>
                         </div>
                         <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="Checkbox_3" name="Checkbox" value="Vidange d'huile">
-                            <label for="Checkbox_3" class="hotel-checkbox-label">🛢️ Vidange d'huile</label>
+                            <input type="checkbox" id="Checkbox_3" name="Checkbox" value="Changement d'huile">
+                            <label for="Checkbox_3" class="hotel-checkbox-label">🛢️ Changement d'huile</label>
                         </div>
                         <div class="hotel-checkbox-item">
                             <input type="checkbox" id="Checkbox_4" name="Checkbox" value="Boutique">
@@ -472,24 +464,24 @@
                 </div>
                 
                 <div class="hotel-form-group">
-                    <label class="hotel-form-label">Détails de la plainte</label>
-                    <textarea class="hotel-form-textarea" name="MultiLine" placeholder="Veuillez décrire la plainte en détail..." maxlength="65535" id="complaintDetails"></textarea>
+                    <label class="hotel-form-label">Détails de la réclamation</label>
+                    <textarea class="hotel-form-textarea" name="MultiLine" placeholder="Veuillez décrire votre réclamation en détail..." maxlength="65535" id="complaintDetails"></textarea>
                     <div class="char-counter">
                     </div>
                 </div>
                 
                 <div class="hotel-form-group">
                     <label class="hotel-form-label">Coordonnées (si possible)</label>
-                    <input type="text" class="hotel-form-input" name="SingleLine1" value="" fieldType=1 maxlength="255" placeholder="Numéro de téléphone ou adresse e-mail">
+                    <input type="text" class="hotel-form-input" name="SingleLine1" value="" fieldType=1 maxlength="255" placeholder="Numéro de téléphone ou e-mail">
                 </div>
                 
                 <div class="hotel-form-group">
-                    <label class="hotel-form-label">Joindre des photos (facultatif)</label>
+                    <label class="hotel-form-label">Joindre des photos (optionnel)</label>
                     <input type="file" accept="image/*" name="ImageUpload" checktype="c1" class="hotel-form-input">
                 </div>
                 
                 <div class="hotel-form-group">
-                    <label class="hotel-form-label">Évaluation de la qualité du service (de 1 à 5 étoiles)</label>
+                    <label class="hotel-form-label">Évaluer la qualité du service (de 1 à 5 étoiles)</label>
                     <div class="hotel-rating-group">
                         <input type="radio" id="hotelStar5" name="Number" value="5">
                         <label for="hotelStar5" class="hotel-rating-label">⭐</label>
@@ -504,14 +496,14 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="hotel-submit-btn">Envoyer la plainte 📤</button>
+                <button type="submit" class="hotel-submit-btn">Envoyer la réclamation 📤</button>
             </form>
         </div>
     </div>
     
     <script>
     (function() {
-        // Afficher/masquer le champ "Autre"
+        // Afficher/Masquer le champ "Autre"
         const otherCheckbox = document.getElementById('Checkbox_others');
         const otherInput = document.getElementById('hotelOtherInput');
         
@@ -548,7 +540,7 @@
                 
                 if (!nameField.value.trim()) {
                     e.preventDefault();
-                    errorMessage.textContent = '⚠️ Veuillez entrer votre nom complet';
+                    errorMessage.textContent = '⚠️ Veuillez saisir votre nom complet';
                     errorMessage.style.display = 'block';
                     successMessage.style.display = 'none';
                     
