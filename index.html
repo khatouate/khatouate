@@ -1,231 +1,293 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج الشكاوى</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام الشكاوى</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
 
-        .complaint-system-wrapper {
-            max-width: 700px;
-            width: 100%;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            direction: rtl;
-        }
+.complaint-container {
+background: white;
+border-radius: 20px;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+max-width: 600px;
+width: 100%;
+padding: 40px;
+}
 
-        .complaint-system-title {
-            text-align: center;
-            color: #667eea;
-            margin-bottom: 30px;
-            font-size: 2em;
-            font-weight: 700;
-        }
+.complaint-header {
+text-align: center;
+margin-bottom: 40px;
+}
 
-        .complaint-step {
-            display: none;
-        }
+.complaint-header h1 {
+color: #333;
+font-size: 2em;
+margin-bottom: 10px;
+}
 
-        .complaint-step.active {
-            display: block;
-            animation: fadeInStep 0.5s;
-        }
+.complaint-step {
+display: none;
+}
 
-        @keyframes fadeInStep {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.complaint-step.active {
+display: block;
+animation: fadeIn 0.5s;
+}
 
-        .complaint-subtitle {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            color: #333;
-            font-weight: 600;
-        }
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
 
-        .complaint-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
+.complaint-step-title {
+text-align: center;
+color: #667eea;
+font-size: 1.5em;
+margin-bottom: 30px;
+}
 
-        .complaint-option-btn {
-            padding: 20px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+.complaint-lang-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 20px;
+margin-bottom: 20px;
+}
 
-        .complaint-option-btn:hover {
-            border-color: #667eea;
-            background: #f0f4ff;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
+.complaint-lang-btn {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+padding: 20px;
+border-radius: 15px;
+font-size: 1.2em;
+cursor: pointer;
+transition: all 0.3s;
+box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
 
-        .complaint-option-btn .icon {
-            width: 60%;
-            height: auto;
-            max-width: 80px;
-        }
+.complaint-lang-btn:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+}
 
-        .complaint-option-btn .text {
-            font-size: 0.9em;
-        }
+.complaint-options {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 20px;
+margin-bottom: 20px;
+}
 
-        .complaint-btn-back {
-            background: #6c757d;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 20px;
-            transition: transform 0.3s;
-        }
+.complaint-option-btn {
+background: white;
+border: 2px solid #e0e0e0;
+border-radius: 15px;
+padding: 20px;
+cursor: pointer;
+transition: all 0.3s;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
 
-        .complaint-btn-back:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
-        }
+.complaint-option-btn:hover {
+border-color: #667eea;
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
 
-        @media screen and (max-width: 768px) {
-            .complaint-system-wrapper {
-                padding: 30px 20px;
-            }
-            
-            .complaint-system-title {
-                font-size: 1.5em;
-            }
-        }
-    </style>
+.complaint-option-btn .icon {
+width: 60px;
+height: 60px;
+object-fit: contain;
+}
+
+.complaint-option-btn .text {
+font-size: 1.1em;
+color: #333;
+font-weight: 500;
+}
+
+.complaint-btn-back {
+width: 100%;
+background: #e0e0e0;
+color: #333;
+border: none;
+padding: 15px;
+border-radius: 10px;
+font-size: 1.1em;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.complaint-btn-back:hover {
+background: #d0d0d0;
+}
+
+@media (max-width: 600px) {
+.complaint-container {
+padding: 20px;
+}
+
+.complaint-lang-grid,
+.complaint-options {
+grid-template-columns: 1fr;
+}
+
+.complaint-header h1 {
+font-size: 1.5em;
+}
+
+.complaint-step-title {
+font-size: 1.2em;
+}
+}
+</style>
 </head>
 <body>
-    <div class="complaint-system-wrapper" id="complaintSystemContainer">
-        
-        <h1 class="complaint-system-title" id="mainTitle">نموذج الشكاوى</h1>
+<div class="complaint-container" id="complaintSystemContainer">
+<div class="complaint-header">
+<h1 id="mainTitle">نموذج الشكاوى</h1>
+</div>
 
-        <!-- Step 1: Language Selection -->
-        <div class="complaint-step active" id="step1">
-            <h2 class="complaint-subtitle">اختر اللغة / Choose Language</h2>
-            <div class="complaint-grid">
-                <button class="complaint-option-btn" onclick="selectComplaintLanguage('ar')">
-                    <span class="text">العربية</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintLanguage('fr')">
-                    <span class="text">Français</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintLanguage('en')">
-                    <span class="text">English</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintLanguage('es')">
-                    <span class="text">Español</span>
-                </button>
-            </div>
-        </div>
+<!-- Step 1: Language Selection -->
+<div class="complaint-step active" id="step1">
+<h2 class="complaint-step-title">اختر اللغة / Choose Language</h2>
+<div class="complaint-lang-grid">
+<button class="complaint-lang-btn" onclick="selectComplaintLanguage('ar')">العربية</button>
+<button class="complaint-lang-btn" onclick="selectComplaintLanguage('en')">English</button>
+<button class="complaint-lang-btn" onclick="selectComplaintLanguage('fr')">Français</button>
+<button class="complaint-lang-btn" onclick="selectComplaintLanguage('es')">Español</button>
+</div>
+</div>
 
-        <!-- Step 2: Category Selection -->
-        <div class="complaint-step" id="step2">
-            <h2 class="complaint-subtitle" id="categoryTitle">اختر الفئة</h2>
-            <div class="complaint-grid">
-                <button class="complaint-option-btn" onclick="selectComplaintCategory('hotel')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3050/3050155.png" alt="Hotel" class="icon">
-                    <span class="text" id="btnHotel">فندق</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintCategory('restaurant')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Restaurant" class="icon">
-                    <span class="text" id="btnRestaurant">مطعم</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintCategory('club')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/857/857418.png" alt="Sports Club" class="icon">
-                    <span class="text" id="btnClub">نادي رياضي</span>
-                </button>
-                <button class="complaint-option-btn" onclick="selectComplaintCategory('gas')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="Gas Station" class="icon">
-                    <span class="text" id="btnGas">محطة وقود</span>
-                </button>
-            </div>
-            <button class="complaint-btn-back" onclick="goToComplaintStep(1)" id="btnBack1">رجوع</button>
-        </div>
-    </div>
+<!-- Step 2: Category Selection -->
+<div class="complaint-step" id="step2">
+<h2 class="complaint-step-title" id="categoryTitle">اختر الفئة</h2>
+<div class="complaint-options">
+<button class="complaint-option-btn" onclick="selectComplaintCategory('hotel')">
+<img src="https://cdn-icons-png.flaticon.com/512/1087/1087815.png" alt="Hotel" class="icon">
+<span class="text" id="btnHotel">فندق</span>
+</button>
+<button class="complaint-option-btn" onclick="selectComplaintCategory('restaurant')">
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Restaurant" class="icon">
+<span class="text" id="btnRestaurant">مطعم</span>
+</button>
+<button class="complaint-option-btn" onclick="selectComplaintCategory('club')">
+<img src="https://cdn-icons-png.flaticon.com/512/857/857418.png" alt="Sports Club" class="icon">
+<span class="text" id="btnClub">نادي رياضي</span>
+</button>
+<button class="complaint-option-btn" onclick="selectComplaintCategory('station')">
+<img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="Gas Station" class="icon">
+<span class="text" id="btnStation">محطة وقود</span>
+</button>
+</div>
+<button class="complaint-btn-back" onclick="goToComplaintStep(1)" id="btnBack1">رجوع</button>
+</div>
+</div>
 
-    <script>
-        (function() {
-            let currentComplaintLang = 'ar';
-            let currentComplaintCategory = '';
+<script>
+(function() {
+let currentComplaintLang = 'ar';
+let currentComplaintCategory = '';
 
-            const complaintTranslations = {
-                ar: { mainTitle: 'نموذج الشكاوى', categoryTitle: 'اختر الفئة', hotel: 'فندق', restaurant: 'مطعم', club: 'نادي رياضي', gas: 'محطة وقود', btnBack: 'رجوع', dir: 'rtl' },
-                en: { mainTitle: 'Complaint Form', categoryTitle: 'Choose Category', hotel: 'Hotel', restaurant: 'Restaurant', club: 'Sports Club', gas: 'Gas Station', btnBack: 'Back', dir: 'ltr' },
-                fr: { mainTitle: 'Formulaire de Réclamation', categoryTitle: 'Choisir la Catégorie', hotel: 'Hôtel', restaurant: 'Restaurant', club: 'Club Sportif', gas: 'Station-service', btnBack: 'Retour', dir: 'ltr' },
-                es: { mainTitle: 'Formulario de Quejas', categoryTitle: 'Elegir Categoría', hotel: 'Hotel', restaurant: 'Restaurante', club: 'Club Deportivo', gas: 'Gasolinera', btnBack: 'Atrás', dir: 'ltr' }
-            };
+const complaintTranslations = {
+ar: { 
+mainTitle: 'نموذج الشكاوى', 
+categoryTitle: 'اختر الفئة', 
+hotel: 'فندق', 
+restaurant: 'مطعم', 
+club: 'نادي رياضي', 
+station: 'محطة وقود', 
+btnBack: 'رجوع', 
+dir: 'rtl' 
+},
+en: { 
+mainTitle: 'Complaint Form', 
+categoryTitle: 'Choose Category', 
+hotel: 'Hotel', 
+restaurant: 'Restaurant', 
+club: 'Sports Club', 
+station: 'Gas Station', 
+btnBack: 'Back', 
+dir: 'ltr' 
+},
+fr: { 
+mainTitle: 'Formulaire de Réclamation', 
+categoryTitle: 'Choisir la Catégorie', 
+hotel: 'Hôtel', 
+restaurant: 'Restaurant', 
+club: 'Club Sportif', 
+station: 'Station-service', 
+btnBack: 'Retour', 
+dir: 'ltr' 
+},
+es: { 
+mainTitle: 'Formulario de Quejas', 
+categoryTitle: 'Elegir Categoría', 
+hotel: 'Hotel', 
+restaurant: 'Restaurante', 
+club: 'Club Deportivo', 
+station: 'Gasolinera', 
+btnBack: 'Atrás', 
+dir: 'ltr' 
+}
+};
 
-            window.selectComplaintLanguage = function(lang) {
-                currentComplaintLang = lang;
-                updateComplaintLanguage();
-                goToComplaintStep(2);
-            };
+window.selectComplaintLanguage = function(lang) {
+currentComplaintLang = lang;
+updateComplaintLanguage();
+goToComplaintStep(2);
+};
 
-            function updateComplaintLanguage() {
-                const t = complaintTranslations[currentComplaintLang];
-                const container = document.getElementById('complaintSystemContainer');
-                container.style.direction = t.dir;
+function updateComplaintLanguage() {
+const t = complaintTranslations[currentComplaintLang];
+const container = document.getElementById('complaintSystemContainer');
+container.style.direction = t.dir;
+document.getElementById('mainTitle').textContent = t.mainTitle;
+document.getElementById('categoryTitle').textContent = t.categoryTitle;
+document.getElementById('btnHotel').textContent = t.hotel;
+document.getElementById('btnRestaurant').textContent = t.restaurant;
+document.getElementById('btnClub').textContent = t.club;
+document.getElementById('btnStation').textContent = t.station;
+document.getElementById('btnBack1').textContent = t.btnBack;
+}
 
-                document.getElementById('mainTitle').textContent = t.mainTitle;
-                document.getElementById('categoryTitle').textContent = t.categoryTitle;
-                document.getElementById('btnHotel').textContent = t.hotel;
-                document.getElementById('btnRestaurant').textContent = t.restaurant;
-                document.getElementById('btnClub').textContent = t.club;
-                document.getElementById('btnGas').textContent = t.gas;
-                document.getElementById('btnBack1').textContent = t.btnBack;
-            }
+window.selectComplaintCategory = function(category) {
+currentComplaintCategory = category;
+const baseUrl = 'https://khatouate.github.io/khatouate';
+const url = baseUrl + '/' + category + '-' + currentComplaintLang + '.html';
+window.location.href = url;
+};
 
-            window.selectComplaintCategory = function(category) {
-                currentComplaintCategory = category;
-                const baseUrl = 'https://khatouate.github.io/khatouate/';
-                const url = baseUrl + '/' + category + '-' + currentComplaintLang;
-                window.location.href = url;
-            };
-
-            window.goToComplaintStep = function(step) {
-                const steps = document.querySelectorAll('.complaint-step');
-                steps.forEach(function(s) { s.classList.remove('active'); });
-                document.getElementById('step' + step).classList.add('active');
-            };
-        })();
-    </script>
+window.goToComplaintStep = function(step) {
+const steps = document.querySelectorAll('.complaint-step');
+steps.forEach(function(s) { s.classList.remove('active'); });
+document.getElementById('step' + step).classList.add('active');
+};
+})();
+</script>
 </body>
 </html>
