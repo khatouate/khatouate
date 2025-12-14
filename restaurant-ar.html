@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج شكاوى المطعم</title>
+
+<style>
+/* === نفس تنسيقات كود الفندق بدون تغيير === */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:'Segoe UI',Tahoma;
+background:linear-gradient(135deg,#667eea,#764ba2);
+min-height:100vh;padding:20px;direction:rtl}
+.form-container{
+max-width:750px;margin:auto;background:#fff;border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;
+animation:slideIn .6s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateY(-30px)}
+to{opacity:1;transform:none}}
+.header{
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:#fff;padding:25px;text-align:center}
+.header h2{font-size:30px;margin-bottom:8px}
+.body{padding:35px}
+.group{margin-bottom:25px}
+label{display:block;font-weight:600;margin-bottom:8px}
+input,textarea{
+width:100%;padding:14px;border:2px solid #e0e0e0;
+border-radius:10px;font-size:15px;background:#fafafa}
+input:focus,textarea:focus{
+border-color:#667eea;outline:none;background:#fff}
+textarea{min-height:120px}
+.checkbox-group{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:12px;margin-top:10px}
+.checkbox-group input{display:none}
+.checkbox-group label{
+padding:14px;border:2px solid #e0e0e0;border-radius:10px;
+cursor:pointer;background:#fafafa;transition:.3s}
+.checkbox-group input:checked+label{
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:#fff;border-color:#667eea}
+.rating{display:flex;justify-content:center;gap:8px}
+.rating input{display:none}
+.rating label{font-size:40px;cursor:pointer;color:#ddd}
+.rating input:checked+label,
+.rating label:hover{color:#ffd700}
+button{
+width:100%;padding:16px;font-size:18px;font-weight:700;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:#fff;border:none;border-radius:10px;cursor:pointer}
+button:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.other{display:none;margin-top:10px}
+.other.active{display:block}
+</style>
+</head>
+
+<body>
+
+<div class="form-container">
+<div class="header">
+<h2>🍽️ نموذج شكاوى المطعم</h2>
+<p>نقدّر ملاحظاتكم لتحسين جودة خدماتنا</p>
+</div>
+
+<div class="body">
+
+<form action="https://forms.zohopublic.com/khatouatesgm1/form/RESTAURANT/formperma/IBzzRjqaeX7Uel__7rHtB96iTsKJD33y8rn5tM_aR_Q/htmlRecords/submit"
+method="POST" enctype="multipart/form-data">
+
+<input type="hidden" name="zf_referrer_name">
+<input type="hidden" name="zf_redirect_url">
+<input type="hidden" name="zc_gad">
+
+<div class="group">
+<label>الاسم</label>
+<input type="text" name="SingleLine" required>
+</div>
+
+<div class="group">
+<label>نوع الشكوى</label>
+<div class="checkbox-group">
+<input type="checkbox" id="c1" name="Checkbox" value="الطعام">
+<label for="c1">🍽️ الطعام</label>
+
+<input type="checkbox" id="c2" name="Checkbox" value="الخدمة">
+<label for="c2">🧑‍🍳 الخدمة</label>
+
+<input type="checkbox" id="c3" name="Checkbox" value="النظافة">
+<label for="c3">🧼 النظافة</label>
+
+<input type="checkbox" id="c4" name="Checkbox" value="موظفي الاستقبال">
+<label for="c4">👥 موظفي الاستقبال</label>
+
+<input type="checkbox" id="otherCheck" name="Checkbox" value="zfs-others-zfs">
+<label for="otherCheck">➕ أخرى</label>
+</div>
+
+<div class="other" id="otherInput">
+<input type="text" name="Checkbox_allow_others_text" placeholder="حدد نوع الشكوى">
+</div>
+</div>
+
+<div class="group">
+<label>تفاصيل الشكوى</label>
+<textarea name="MultiLine"></textarea>
+</div>
+
+<div class="group">
+<label>إرفاق صور أو فيديو (اختياري)</label>
+<input type="file" accept="image/*" name="ImageUpload">
+</div>
+
+<div class="group">
+<label>معلومات الاتصال (اختياري)</label>
+<input type="text" name="SingleLine3">
+</div>
+
+<div class="group">
+<label>التقييم</label>
+<div class="rating">
+<input type="radio" id="s5" name="Number" value="5"><label for="s5">⭐</label>
+<input type="radio" id="s4" name="Number" value="4"><label for="s4">⭐</label>
+<input type="radio" id="s3" name="Number" value="3"><label for="s3">⭐</label>
+<input type="radio" id="s2" name="Number" value="2"><label for="s2">⭐</label>
+<input type="radio" id="s1" name="Number" value="1"><label for="s1">⭐</label>
+</div>
+</div>
+
+<button type="submit">إرسال الشكوى 📤</button>
+
+</form>
+</div>
+</div>
+
+<script>
+const otherCheck=document.getElementById('otherCheck');
+const otherInput=document.getElementById('otherInput');
+otherCheck.addEventListener('change',()=>{
+otherInput.classList.toggle('active',otherCheck.checked);
+});
+</script>
+
+</body>
+</html>
