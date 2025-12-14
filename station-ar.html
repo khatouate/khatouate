@@ -225,6 +225,27 @@
             background-repeat: no-repeat;
         }
         
+        .hotel-other-input {
+            margin-top: 12px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 100px;
+            }
+        }
+        
+        .hotel-other-input.active {
+            display: block;
+        }
+        
         .hotel-rating-group {
             display: flex;
             gap: 8px;
@@ -426,6 +447,13 @@
                             <input type="checkbox" id="Checkbox_4" name="Checkbox" value="المتجر">
                             <label for="Checkbox_4" class="hotel-checkbox-label">🏪 المتجر</label>
                         </div>
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_others" name="Checkbox" value="zfs-others-zfs">
+                            <label for="Checkbox_others" class="hotel-checkbox-label">➕ أخرى</label>
+                        </div>
+                    </div>
+                    <div class="hotel-other-input" id="hotelOtherInput">
+                        <input type="text" class="hotel-form-input" name="Checkbox_allow_others_text" placeholder="يرجى تحديد نوع الخدمة" maxlength="150">
                     </div>
                 </div>
                 
@@ -470,6 +498,21 @@
     
     <script>
     (function() {
+        // إظهار/إخفاء حقل "أخرى"
+        const otherCheckbox = document.getElementById('Checkbox_others');
+        const otherInput = document.getElementById('hotelOtherInput');
+        
+        if (otherCheckbox && otherInput) {
+            otherCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    otherInput.classList.add('active');
+                    otherInput.querySelector('input').focus();
+                } else {
+                    otherInput.classList.remove('active');
+                }
+            });
+        }
+        
         // عداد الأحرف
         const complaintDetails = document.getElementById('complaintDetails');
         const charCount = document.getElementById('charCount');
