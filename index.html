@@ -1,591 +1,231 @@
+
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج شكاوى الفندق</title>
+    <title>نموذج الشكاوى</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            direction: rtl;
         }
-        
-        .hotel-form-container {
-            max-width: 750px;
-            margin: 0 auto;
+
+        .complaint-system-wrapper {
+            max-width: 700px;
+            width: 100%;
             background: white;
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            animation: slideIn 0.6s ease-out;
+            direction: rtl;
         }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hotel-form-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px 40px;
+
+        .complaint-system-title {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hotel-logo {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .hotel-form-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .hotel-form-header h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
             font-weight: 700;
-            position: relative;
-            z-index: 1;
         }
-        
-        .hotel-form-header p {
-            font-size: 16px;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
+
+        .complaint-step {
+            display: none;
         }
-        
-        .hotel-form-body {
-            padding: 40px 30px;
-        }
-        
-        .hotel-form-group {
-            margin-bottom: 25px;
-            animation: fadeIn 0.5s ease-out backwards;
-        }
-        
-        .hotel-form-group:nth-child(1) { animation-delay: 0.1s; }
-        .hotel-form-group:nth-child(2) { animation-delay: 0.2s; }
-        .hotel-form-group:nth-child(3) { animation-delay: 0.3s; }
-        .hotel-form-group:nth-child(4) { animation-delay: 0.4s; }
-        .hotel-form-group:nth-child(5) { animation-delay: 0.5s; }
-        .hotel-form-group:nth-child(6) { animation-delay: 0.6s; }
-        .hotel-form-group:nth-child(7) { animation-delay: 0.7s; }
-        .hotel-form-group:nth-child(8) { animation-delay: 0.8s; }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hotel-form-label {
+
+        .complaint-step.active {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
+            animation: fadeInStep 0.5s;
+        }
+
+        @keyframes fadeInStep {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .complaint-subtitle {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3em;
             color: #333;
-            font-size: 16px;
-        }
-        
-        .hotel-form-required::after {
-            content: " *";
-            color: #e74c3c;
-        }
-        
-        .hotel-form-input,
-        .hotel-form-textarea {
-            width: 100%;
-            padding: 14px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            background: #fafafa;
-        }
-        
-        input[type="file"].hotel-form-input {
-            padding: 10px;
-            cursor: pointer;
-        }
-        
-        input[type="file"].hotel-form-input::-webkit-file-upload-button {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
             font-weight: 600;
-            margin-left: 10px;
-            transition: all 0.3s ease;
         }
-        
-        input[type="file"].hotel-form-input::-webkit-file-upload-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-        
-        .hotel-form-input:focus,
-        .hotel-form-textarea:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            outline: none;
-            background: white;
-        }
-        
-        .hotel-form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .hotel-checkbox-group {
+
+        .complaint-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
-        
-        .hotel-checkbox-item input[type="checkbox"] {
-            display: none;
-        }
-        
-        .hotel-checkbox-label {
-            display: flex;
-            align-items: center;
-            padding: 14px 15px;
+
+        .complaint-option-btn {
+            padding: 20px;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            background: white;
+            border-radius: 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            background: #fafafa;
-        }
-        
-        .hotel-checkbox-label:hover {
-            border-color: #667eea;
-            background: #f0f3ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-        }
-        
-        .hotel-checkbox-item input[type="checkbox"]:checked + .hotel-checkbox-label {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-        
-        .hotel-checkbox-label::before {
-            content: '';
-            width: 22px;
-            height: 22px;
-            border: 2px solid #ccc;
-            border-radius: 6px;
-            margin-left: 12px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            background: white;
-        }
-        
-        .hotel-checkbox-item input[type="checkbox"]:checked + .hotel-checkbox-label::before {
-            border-color: white;
-            background: white;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-            background-size: 16px;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .hotel-other-input {
-            margin-top: 12px;
-            display: none;
-            animation: slideDown 0.3s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                max-height: 100px;
-            }
-        }
-        
-        .hotel-other-input.active {
-            display: block;
-        }
-        
-        .hotel-rating-group {
+            transition: all 0.3s;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
             display: flex;
-            gap: 8px;
-            flex-direction: row-reverse;
-            justify-content: center;
-            margin-top: 10px;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .hotel-rating-group input[type="radio"] {
-            display: none;
+
+        .complaint-option-btn:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
-        
-        .hotel-rating-label {
-            font-size: 40px;
-            color: #ddd;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            filter: grayscale(100%);
+
+        .complaint-option-btn .icon {
+            width: 60%;
+            height: auto;
+            max-width: 80px;
         }
-        
-        .hotel-rating-label:hover {
-            color: #ffd700;
-            transform: scale(1.2);
-            filter: grayscale(0%);
+
+        .complaint-option-btn .text {
+            font-size: 0.9em;
         }
-        
-        .hotel-rating-group:hover .hotel-rating-label {
-            color: #ddd;
-            filter: grayscale(100%);
-        }
-        
-        .hotel-rating-label:hover,
-        .hotel-rating-label:hover ~ .hotel-rating-label {
-            color: #ffd700;
-            filter: grayscale(0%);
-        }
-        
-        .hotel-rating-group input[type="radio"]:checked + .hotel-rating-label {
-            color: #ffd700;
-            filter: grayscale(0%);
-            animation: starBounce 0.5s ease;
-        }
-        
-        .hotel-rating-group input[type="radio"]:checked + .hotel-rating-label ~ .hotel-rating-label {
-            color: #ffd700;
-            filter: grayscale(0%);
-        }
-        
-        @keyframes starBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-        
-        .hotel-submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .complaint-btn-back {
+            background: #6c757d;
             color: white;
+            padding: 15px 30px;
             border: none;
             border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.3s;
         }
-        
-        .hotel-submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+
+        .complaint-btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
         }
-        
-        .hotel-submit-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .hotel-submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
-        }
-        
-        .hotel-submit-btn:active {
-            transform: translateY(-1px);
-        }
-        
-        .success-message {
-            display: none;
-            background: #d4edda;
-            border: 2px solid #28a745;
-            color: #155724;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        .error-message {
-            display: none;
-            background: #f8d7da;
-            border: 2px solid #dc3545;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        .char-counter {
-            text-align: left;
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
-            display: none;
-        }
-        
+
         @media screen and (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .hotel-form-container {
-                border-radius: 15px;
-            }
-            
-            .hotel-form-header {
-                padding: 15px 20px 30px;
-            }
-            
-            .hotel-logo {
-                width: 100%;
-            }
-            
-            .hotel-form-header h2 {
-                font-size: 26px;
-            }
-            
-            .hotel-form-body {
+            .complaint-system-wrapper {
                 padding: 30px 20px;
             }
             
-            .hotel-checkbox-group {
-                grid-template-columns: 1fr;
-            }
-            
-            .hotel-rating-label {
-                font-size: 35px;
+            .complaint-system-title {
+                font-size: 1.5em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hotel-form-container">
-        <div class="hotel-form-header">
-            <img src="https://omar-pri.rf.gd/hotel/logo%20(1).png" alt="شعار الفندق" class="hotel-logo">
-            <h2>📋 نموذج شكاوى الفندق</h2>
-            <p>نقدّر ملاحظاتكم ونسعى لتحسين خدماتنا باستمرار</p>
-        </div>
-        <div class="hotel-form-body">
-            <div class="success-message" id="successMessage">
-                ✅ تم إرسال شكواك بنجاح! سنتواصل معك قريباً.
+    <div class="complaint-system-wrapper" id="complaintSystemContainer">
+        
+        <h1 class="complaint-system-title" id="mainTitle">نموذج الشكاوى</h1>
+
+        <!-- Step 1: Language Selection -->
+        <div class="complaint-step active" id="step1">
+            <h2 class="complaint-subtitle">اختر اللغة / Choose Language</h2>
+            <div class="complaint-grid">
+                <button class="complaint-option-btn" onclick="selectComplaintLanguage('ar')">
+                    <span class="text">العربية</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintLanguage('fr')">
+                    <span class="text">Français</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintLanguage('en')">
+                    <span class="text">English</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintLanguage('es')">
+                    <span class="text">Español</span>
+                </button>
             </div>
-            <div class="error-message" id="errorMessage"></div>
-            
-            <form action='https://forms.zohopublic.com/khatouatesgm1/form/HOTELAR/formperma/4s7of_-AAPmX5z-QPZXT_TX6O9FMsxSXMBegYC-FyGE/htmlRecords/submit' method='POST' accept-charset='UTF-8' enctype='multipart/form-data' id='hotelComplaintForm'>
-                <input type="hidden" name="zf_referrer_name" value="">
-                <input type="hidden" name="zf_redirect_url" value="">
-                <input type="hidden" name="zc_gad" value="">
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label hotel-form-required">الاسم الكامل</label>
-                    <input type="text" class="hotel-form-input" name="SingleLine" required placeholder="أدخل اسمك الكامل">
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">رقم الغرفة</label>
-                    <input type="text" class="hotel-form-input" name="SingleLine1" placeholder="مثال: 205" pattern="[0-9]{1,4}">
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">تاريخ الإقامة</label>
-                    <input type="date" class="hotel-form-input" name="SingleLine2" id="dateInput">
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">نوع الشكوى</label>
-                    <div class="hotel-checkbox-group">
-                        <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="hotelClean" name="Checkbox" value="نظافة الغرفة">
-                            <label for="hotelClean" class="hotel-checkbox-label">🧹 نظافة الغرفة</label>
-                        </div>
-                        <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="hotelFood" name="Checkbox" value="الطعام والشراب">
-                            <label for="hotelFood" class="hotel-checkbox-label">🍽️ الطعام والشراب</label>
-                        </div>
-                        <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="hotelFacilities" name="Checkbox" value="مرافق الفندق">
-                            <label for="hotelFacilities" class="hotel-checkbox-label">🏨 مرافق الفندق</label>
-                        </div>
-                        <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="hotelBooking" name="Checkbox" value="الحجز">
-                            <label for="hotelBooking" class="hotel-checkbox-label">📅 الحجز</label>
-                        </div>
-                        <div class="hotel-checkbox-item">
-                            <input type="checkbox" id="hotelOther" name="Checkbox" value="zfs-others-zfs">
-                            <label for="hotelOther" class="hotel-checkbox-label">➕ أخرى</label>
-                        </div>
-                    </div>
-                    <div class="hotel-other-input" id="hotelOtherInput">
-                        <input type="text" class="hotel-form-input" name="Checkbox_allow_others_text" placeholder="يرجى تحديد نوع الشكوى" maxlength="150">
-                    </div>
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">تفاصيل الشكوى</label>
-                    <textarea class="hotel-form-textarea" name="MultiLine" placeholder="يرجى وصف الشكوى بالتفصيل..." maxlength="65535" id="complaintDetails"></textarea>
-                    <div class="char-counter">
-                        <span id="charCount">0</span> / 65535 حرف
-                    </div>
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">إرفاق صور (اختياري)</label>
-                    <input type="file" accept="image/*" name="ImageUpload" checktype="c1" class="hotel-form-input">
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">معلومات الاتصال (اختياري)</label>
-                    <input type="text" class="hotel-form-input" name="SingleLine3" placeholder="رقم الهاتف أو البريد الإلكتروني">
-                </div>
-                
-                <div class="hotel-form-group">
-                    <label class="hotel-form-label">التقييم (من 1 إلى 5 نجوم)</label>
-                    <div class="hotel-rating-group">
-                        <input type="radio" id="hotelStar5" name="Number" value="5">
-                        <label for="hotelStar5" class="hotel-rating-label">⭐</label>
-                        <input type="radio" id="hotelStar4" name="Number" value="4">
-                        <label for="hotelStar4" class="hotel-rating-label">⭐</label>
-                        <input type="radio" id="hotelStar3" name="Number" value="3">
-                        <label for="hotelStar3" class="hotel-rating-label">⭐</label>
-                        <input type="radio" id="hotelStar2" name="Number" value="2">
-                        <label for="hotelStar2" class="hotel-rating-label">⭐</label>
-                        <input type="radio" id="hotelStar1" name="Number" value="1">
-                        <label for="hotelStar1" class="hotel-rating-label">⭐</label>
-                    </div>
-                </div>
-                
-                <button type="submit" class="hotel-submit-btn">إرسال الشكوى 📤</button>
-            </form>
+        </div>
+
+        <!-- Step 2: Category Selection -->
+        <div class="complaint-step" id="step2">
+            <h2 class="complaint-subtitle" id="categoryTitle">اختر الفئة</h2>
+            <div class="complaint-grid">
+                <button class="complaint-option-btn" onclick="selectComplaintCategory('hotel')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3050/3050155.png" alt="Hotel" class="icon">
+                    <span class="text" id="btnHotel">فندق</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintCategory('restaurant')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Restaurant" class="icon">
+                    <span class="text" id="btnRestaurant">مطعم</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintCategory('club')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/857/857418.png" alt="Sports Club" class="icon">
+                    <span class="text" id="btnClub">نادي رياضي</span>
+                </button>
+                <button class="complaint-option-btn" onclick="selectComplaintCategory('gas')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="Gas Station" class="icon">
+                    <span class="text" id="btnGas">محطة وقود</span>
+                </button>
+            </div>
+            <button class="complaint-btn-back" onclick="goToComplaintStep(1)" id="btnBack1">رجوع</button>
         </div>
     </div>
-    
+
     <script>
-    (function() {
-        // إظهار/إخفاء حقل "أخرى"
-        const otherCheckbox = document.getElementById('hotelOther');
-        const otherInput = document.getElementById('hotelOtherInput');
-        
-        if (otherCheckbox && otherInput) {
-            otherCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    otherInput.classList.add('active');
-                    otherInput.querySelector('input').focus();
-                } else {
-                    otherInput.classList.remove('active');
-                }
-            });
-        }
-        
-        // عداد الأحرف
-        const complaintDetails = document.getElementById('complaintDetails');
-        const charCount = document.getElementById('charCount');
-        
-        if (complaintDetails && charCount) {
-            complaintDetails.addEventListener('input', function() {
-                charCount.textContent = this.value.length;
-            });
-        }
-        
-        // التحقق من صحة النموذج
-        const form = document.getElementById('hotelComplaintForm');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-        
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                // التحقق من إدخال الاسم فقط
-                const nameField = document.querySelector('input[name="SingleLine"]');
-                
-                if (!nameField.value.trim()) {
-                    e.preventDefault();
-                    errorMessage.textContent = '⚠️ يرجى إدخال الاسم الكامل';
-                    errorMessage.style.display = 'block';
-                    successMessage.style.display = 'none';
-                    
-                    setTimeout(() => {
-                        errorMessage.style.display = 'none';
-                    }, 4000);
-                    
-                    return false;
-                }
-            });
-        }
-        
-        // تحسين تجربة المستخدم للنجوم
-        const ratingLabels = document.querySelectorAll('.hotel-rating-label');
-        ratingLabels.forEach(label => {
-            label.addEventListener('click', function() {
-                this.style.animation = 'none';
-                setTimeout(() => {
-                    this.style.animation = 'starBounce 0.5s ease';
-                }, 10);
-            });
-        });
-    })();
+        (function() {
+            let currentComplaintLang = 'ar';
+            let currentComplaintCategory = '';
+
+            const complaintTranslations = {
+                ar: { mainTitle: 'نموذج الشكاوى', categoryTitle: 'اختر الفئة', hotel: 'فندق', restaurant: 'مطعم', club: 'نادي رياضي', gas: 'محطة وقود', btnBack: 'رجوع', dir: 'rtl' },
+                en: { mainTitle: 'Complaint Form', categoryTitle: 'Choose Category', hotel: 'Hotel', restaurant: 'Restaurant', club: 'Sports Club', gas: 'Gas Station', btnBack: 'Back', dir: 'ltr' },
+                fr: { mainTitle: 'Formulaire de Réclamation', categoryTitle: 'Choisir la Catégorie', hotel: 'Hôtel', restaurant: 'Restaurant', club: 'Club Sportif', gas: 'Station-service', btnBack: 'Retour', dir: 'ltr' },
+                es: { mainTitle: 'Formulario de Quejas', categoryTitle: 'Elegir Categoría', hotel: 'Hotel', restaurant: 'Restaurante', club: 'Club Deportivo', gas: 'Gasolinera', btnBack: 'Atrás', dir: 'ltr' }
+            };
+
+            window.selectComplaintLanguage = function(lang) {
+                currentComplaintLang = lang;
+                updateComplaintLanguage();
+                goToComplaintStep(2);
+            };
+
+            function updateComplaintLanguage() {
+                const t = complaintTranslations[currentComplaintLang];
+                const container = document.getElementById('complaintSystemContainer');
+                container.style.direction = t.dir;
+
+                document.getElementById('mainTitle').textContent = t.mainTitle;
+                document.getElementById('categoryTitle').textContent = t.categoryTitle;
+                document.getElementById('btnHotel').textContent = t.hotel;
+                document.getElementById('btnRestaurant').textContent = t.restaurant;
+                document.getElementById('btnClub').textContent = t.club;
+                document.getElementById('btnGas').textContent = t.gas;
+                document.getElementById('btnBack1').textContent = t.btnBack;
+            }
+
+            window.selectComplaintCategory = function(category) {
+                currentComplaintCategory = category;
+                const baseUrl = 'https://khatouate.github.io/khatouate/';
+                const url = baseUrl + '/' + category + '-' + currentComplaintLang;
+                window.location.href = url;
+            };
+
+            window.goToComplaintStep = function(step) {
+                const steps = document.querySelectorAll('.complaint-step');
+                steps.forEach(function(s) { s.classList.remove('active'); });
+                document.getElementById('step' + step).classList.add('active');
+            };
+        })();
     </script>
 </body>
 </html>
