@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gas Station Complaint Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: ltr;
+        }
+        
+        .hotel-form-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hotel-form-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hotel-form-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .hotel-form-header h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hotel-form-header p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hotel-form-body {
+            padding: 40px 30px;
+        }
+        
+        .hotel-form-group {
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease-out backwards;
+        }
+        
+        .hotel-form-group:nth-child(1) { animation-delay: 0.1s; }
+        .hotel-form-group:nth-child(2) { animation-delay: 0.2s; }
+        .hotel-form-group:nth-child(3) { animation-delay: 0.3s; }
+        .hotel-form-group:nth-child(4) { animation-delay: 0.4s; }
+        .hotel-form-group:nth-child(5) { animation-delay: 0.5s; }
+        .hotel-form-group:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hotel-form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .hotel-form-required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .hotel-form-input,
+        .hotel-form-textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: #fafafa;
+        }
+        
+        input[type="file"].hotel-form-input {
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        input[type="file"].hotel-form-input::-webkit-file-upload-button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="file"].hotel-form-input::-webkit-file-upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .hotel-form-input:focus,
+        .hotel-form-textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            outline: none;
+            background: white;
+        }
+        
+        .hotel-form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .hotel-checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .hotel-checkbox-item input[type="checkbox"] {
+            display: none;
+        }
+        
+        .hotel-checkbox-label {
+            display: flex;
+            align-items: center;
+            padding: 14px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            background: #fafafa;
+        }
+        
+        .hotel-checkbox-label:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        
+        .hotel-checkbox-item input[type="checkbox"]:checked + .hotel-checkbox-label {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .hotel-checkbox-label::before {
+            content: '';
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            background: white;
+        }
+        
+        .hotel-checkbox-item input[type="checkbox"]:checked + .hotel-checkbox-label::before {
+            border-color: white;
+            background: white;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: 16px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .hotel-other-input {
+            margin-top: 12px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 100px;
+            }
+        }
+        
+        .hotel-other-input.active {
+            display: block;
+        }
+        
+        .hotel-rating-group {
+            display: flex;
+            gap: 8px;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .hotel-rating-group input[type="radio"] {
+            display: none;
+        }
+        
+        .hotel-rating-label {
+            font-size: 40px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            filter: grayscale(100%);
+        }
+        
+        .hotel-rating-label:hover {
+            color: #ffd700;
+            transform: scale(1.2);
+            filter: grayscale(0%);
+        }
+        
+        .hotel-rating-group:hover .hotel-rating-label {
+            color: #ddd;
+            filter: grayscale(100%);
+        }
+        
+        .hotel-rating-label:hover,
+        .hotel-rating-label:hover ~ .hotel-rating-label {
+            color: #ffd700;
+            filter: grayscale(0%);
+        }
+        
+        .hotel-rating-group input[type="radio"]:checked + .hotel-rating-label {
+            color: #ffd700;
+            filter: grayscale(0%);
+            animation: starBounce 0.5s ease;
+        }
+        
+        .hotel-rating-group input[type="radio"]:checked + .hotel-rating-label ~ .hotel-rating-label {
+            color: #ffd700;
+            filter: grayscale(0%);
+        }
+        
+        @keyframes starBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .hotel-submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hotel-submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .hotel-submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .hotel-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+        }
+        
+        .hotel-submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .char-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .hotel-form-container {
+                border-radius: 15px;
+            }
+            
+            .hotel-form-header {
+                padding: 15px 20px 30px;
+            }
+            
+            .hotel-form-header h2 {
+                font-size: 26px;
+            }
+            
+            .hotel-form-body {
+                padding: 30px 20px;
+            }
+            
+            .hotel-checkbox-group {
+                grid-template-columns: 1fr;
+            }
+             .hotel-logo {
+                max-width: 100%;
+                margin-bottom: 12px;
+                padding: 8px;
+            }
+            
+            .hotel-rating-label {
+                font-size: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hotel-form-container">
+        <div class="hotel-form-header">
+            <img src="https://khatouate.github.io/khatouate/logo.png" alt="Logo" class="hotel-logo">
+            <h2>⛽ Gas Station Complaint Form</h2>
+            <p>We value your feedback and strive to continuously improve our services</p>
+        </div>
+        <div class="hotel-form-body">
+            <div class="success-message" id="successMessage">
+                ✅ Your complaint has been submitted successfully! We will contact you soon.
+            </div>
+            <div class="error-message" id="errorMessage"></div>
+            
+            <form action='https://forms.zohopublic.com/directionalakhawin1/form/Station/formperma/8LbxliotkeZooRhfT_W3Q2lF3JEg8CEtAGtYaCz1qcg/htmlRecords/submit' name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'>
+                <input type="hidden" name="zf_referrer_name" value="">
+                <input type="hidden" name="zf_redirect_url" value="">
+                <input type="hidden" name="zc_gad" value="">
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label hotel-form-required">Name</label>
+                    <input type="text" class="hotel-form-input" name="SingleLine" value="" fieldType=1 maxlength="255" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label">Type of Service Received</label>
+                    <div class="hotel-checkbox-group">
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_1" name="Checkbox" value="Fuel Refill">
+                            <label for="Checkbox_1" class="hotel-checkbox-label">⛽ Fuel Refill</label>
+                        </div>
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_2" name="Checkbox" value="Car Wash">
+                            <label for="Checkbox_2" class="hotel-checkbox-label">🚗 Car Wash</label>
+                        </div>
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_3" name="Checkbox" value="Oil Change">
+                            <label for="Checkbox_3" class="hotel-checkbox-label">🛢️ Oil Change</label>
+                        </div>
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_4" name="Checkbox" value="Store">
+                            <label for="Checkbox_4" class="hotel-checkbox-label">🏪 Store</label>
+                        </div>
+                        <div class="hotel-checkbox-item">
+                            <input type="checkbox" id="Checkbox_others" name="Checkbox" value="zfs-others-zfs">
+                            <label for="Checkbox_others" class="hotel-checkbox-label">➕ Other</label>
+                        </div>
+                    </div>
+                    <div class="hotel-other-input" id="hotelOtherInput">
+                        <input type="text" class="hotel-form-input" name="Checkbox_allow_others_text" placeholder="Please specify the service type" maxlength="150">
+                    </div>
+                </div>
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label">Complaint Details</label>
+                    <textarea class="hotel-form-textarea" name="MultiLine" placeholder="Please describe your complaint in detail..." maxlength="65535" id="complaintDetails"></textarea>
+                    <div class="char-counter">
+                    </div>
+                </div>
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label">Contact Information (if possible)</label>
+                    <input type="text" class="hotel-form-input" name="SingleLine1" value="" fieldType=1 maxlength="255" placeholder="Phone number or email">
+                </div>
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label">Attach Photos (optional)</label>
+                    <input type="file" accept="image/*" name="ImageUpload" checktype="c1" class="hotel-form-input">
+                </div>
+                
+                <div class="hotel-form-group">
+                    <label class="hotel-form-label">Rate Service Quality (1 to 5 stars)</label>
+                    <div class="hotel-rating-group">
+                        <input type="radio" id="hotelStar5" name="Number" value="5">
+                        <label for="hotelStar5" class="hotel-rating-label">⭐</label>
+                        <input type="radio" id="hotelStar4" name="Number" value="4">
+                        <label for="hotelStar4" class="hotel-rating-label">⭐</label>
+                        <input type="radio" id="hotelStar3" name="Number" value="3">
+                        <label for="hotelStar3" class="hotel-rating-label">⭐</label>
+                        <input type="radio" id="hotelStar2" name="Number" value="2">
+                        <label for="hotelStar2" class="hotel-rating-label">⭐</label>
+                        <input type="radio" id="hotelStar1" name="Number" value="1">
+                        <label for="hotelStar1" class="hotel-rating-label">⭐</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="hotel-submit-btn">Submit Complaint 📤</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+    (function() {
+        // Show/Hide "Other" field
+        const otherCheckbox = document.getElementById('Checkbox_others');
+        const otherInput = document.getElementById('hotelOtherInput');
+        
+        if (otherCheckbox && otherInput) {
+            otherCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    otherInput.classList.add('active');
+                    otherInput.querySelector('input').focus();
+                } else {
+                    otherInput.classList.remove('active');
+                }
+            });
+        }
+        
+        // Character counter
+        const complaintDetails = document.getElementById('complaintDetails');
+        const charCount = document.getElementById('charCount');
+        
+        if (complaintDetails && charCount) {
+            complaintDetails.addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+        }
+        
+        // Form validation
+        const form = document.getElementById('form');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Check only name input
+                const nameField = document.querySelector('input[name="SingleLine"]');
+                
+                if (!nameField.value.trim()) {
+                    e.preventDefault();
+                    errorMessage.textContent = '⚠️ Please enter your full name';
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 4000);
+                    
+                    return false;
+                }
+            });
+        }
+        
+        // Improve user experience for stars
+        const ratingLabels = document.querySelectorAll('.hotel-rating-label');
+        ratingLabels.forEach(label => {
+            label.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'starBounce 0.5s ease';
+                }, 10);
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
